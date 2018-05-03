@@ -1,8 +1,8 @@
 /**
 * @description Represents a Character
 * @constructor
-* @param {number} x - The initial position of the character on the x axis
-* @param {number} y - The initial position of the character on the y axis
+* @param {number} x - The initial position of the character on the x-axis
+* @param {number} y - The initial position of the character on the y-axis
 * @param {string} sprite - The sprite for the character
 */
 class Character {
@@ -21,8 +21,8 @@ class Character {
 
     /**
     * @description Resets character position
-    * @param {number} x - character position on the x axis
-    * @param {number} y - character position on the y axis
+    * @param {number} x - character position on the x-axis
+    * @param {number} y - character position on the y-axis
     */
     reset(x, y) {
         this.x = x;
@@ -34,10 +34,18 @@ class Character {
 
 const initialEnemyPositionX = -100;
 
+/**
+* @description Generates a random enemy starting position on the y-axis
+* @returns {number} random enemy starting position on the y-axis
+*/
 function randomEnemyPositionY() {
     return 60 +  (Math.floor(Math.random() * 3) * 83);
 }
 
+/**
+* @description Generates a random enemy speed 
+* @returns {number} random enemy speed
+*/
 function randomEnemySpeed() {
     return Math.floor(Math.random() * 250) + 150;
 }
