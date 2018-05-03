@@ -70,6 +70,9 @@ class Player extends Char {
             case 'up':
                 if (this.y > minPlayerPosition) {
                     this.y -= playerSpeedY;
+                    if (this.y <= minPlayerPosition) {
+                        setTimeout(() => this.reset(), 200);
+                    }
                 }
                 break;
             case 'right':
