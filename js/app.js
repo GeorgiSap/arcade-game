@@ -1,17 +1,29 @@
-class Char {
+/**
+* @description Represents a Character
+* @constructor
+* @param {number} x - The initial position of the character on the x axis
+* @param {number} y - The initial position of the character on the y axis
+* @param {string} sprite - The sprite for the character
+*/
+class Character {
     constructor(x, y, sprite) {
         this.x = x;
         this.y = y;
-        // The image/sprite for our enemies, this uses
-        // a helper we've provided to easily load images
         this.sprite = sprite;
     }
 
-    // Draw the enemy on the screen, required method for game
+    /**
+    * @description Draws the character on the screen
+    */
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y); 
     }
 
+    /**
+    * @description Resets character position
+    * @param {number} x - character position on the x axis
+    * @param {number} y - character position on the y axis
+    */
     reset(x, y) {
         this.x = x;
         this.y = y;
@@ -30,19 +42,21 @@ function randomEnemySpeed() {
     return Math.floor(Math.random() * 250) + 150;
 }
 
-// Enemies our player must avoid
-class Enemy extends Char {
+/**
+* @description Represents an Enemy
+* @extends Character
+*/
+class Enemy extends Character {
     constructor() {
         super(initialEnemyPositionX, randomEnemyPositionY(), 'images/enemy-bug.png');
         this.speed = randomEnemySpeed();
     }
 
-    // Update the enemy's position, required method for game
-    // Parameter: dt, a time delta between ticks
+    /**
+    * @description Update the enemy's position
+    * @param {number} dt - time delta between ticks
+    */
     update(dt) {
-        // Multiplies any movement by the dt parameter
-        // to ensure the game runs at the same speed for
-        // all computers.
         this.x += this.speed * dt;
         if (this.x > 505) {
             this.reset();
@@ -64,12 +78,19 @@ const minPlayerPosition = 0;
 const initialPlayerPositionX = 202;
 const initialPlayerPositionY = 406;
 
-class Player extends Char {
+/**
+* @description Represents a Player
+* @extends Character
+*/
+class Player extends Character {
 
     constructor() {
         super(initialPlayerPositionX, initialPlayerPositionY, 'images/char-boy.png');
     }
 
+    /**
+    * @description Detects collisions with an enemy
+    */
     update() {
         for (const enemy of allEnemies) {
             if (Math.abs(enemy.x - this.x) < 65 && Math.abs(enemy.y - this.y) < 50) {
@@ -78,6 +99,9 @@ class Player extends Char {
         }
     }
 
+    /**
+    * @description Handles player movement based on pressed key
+    */
     handleInput(pressedkey) {
         switch(pressedkey) {
             case 'left':
@@ -112,9 +136,7 @@ class Player extends Char {
 
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// Player and enemies instantiation
 let player = new Player();
 let enemy1 = new Enemy();
 let enemy2 = new Enemy();
@@ -125,13 +147,12 @@ var intervalID = setInterval(function () {
    let enemy = new Enemy();
    allEnemies.push(enemy);
    if (++delayedEnemies === 2) {
-       window.clearInterval(intervalID);
+       clearInterval(intervalID);
    }
 }, 500);
 
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Listens for key presses and sends the keys to Player.handleInput()
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
