@@ -1,12 +1,28 @@
-// Enemies our player must avoid
-class Enemy {
-    constructor() {
-        this.x = -100;
-        this.y = 60 +  (Math.floor(Math.random() * 3) * 83);
-        this.speed = Math.floor(Math.random() * 250) + 150;
+class Char {
+    constructor(x, y, sprite) {
+        this.x = x;
+        this.y = y;
         // The image/sprite for our enemies, this uses
         // a helper we've provided to easily load images
-        this.sprite = 'images/enemy-bug.png';
+        this.sprite = sprite;
+    }
+
+    // Draw the enemy on the screen, required method for game
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y); 
+    }
+
+    reset(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+// Enemies our player must avoid
+class Enemy extends Char {
+    constructor() {
+        super(-100, 60 +  (Math.floor(Math.random() * 3) * 83), 'images/enemy-bug.png');
+        this.speed = Math.floor(Math.random() * 250) + 150;
     }
 
     // Update the enemy's position, required method for game
@@ -21,14 +37,8 @@ class Enemy {
         }
     }
 
-    // Draw the enemy on the screen, required method for game
-    render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y); 
-    }
-
     reset() {
-        this.x = -100;
-        this.y = 60 +  (Math.floor(Math.random() * 3) * 83);
+        super.reset(-100, 60 +  (Math.floor(Math.random() * 3) * 83));
         this.speed = Math.floor(Math.random() * 200) + 150;
     }
 }
@@ -40,20 +50,14 @@ const minPlayerPosition = 0;
 const initialPlayerPositionX = 202;
 const initialPlayerPositionY = 406;
 
-class Player {
+class Player extends Char {
 
     constructor() {
-        this.sprite = 'images/char-boy.png';
-        this.x = initialPlayerPositionX;
-        this.y = initialPlayerPositionY;
+        super(initialPlayerPositionX, initialPlayerPositionY, 'images/char-boy.png');
     }
 
     update() {
 
-    }
-
-    render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
     handleInput(pressedkey) {
@@ -82,8 +86,7 @@ class Player {
     }
 
     reset() {
-        this.x = initialPlayerPositionX;
-        this.y = initialPlayerPositionY;
+        super.reset(initialPlayerPositionX, initialPlayerPositionY);
     }
 
 }
@@ -98,11 +101,11 @@ let enemy3 = new Enemy();
 let allEnemies = [enemy1, enemy2, enemy3];
 var delayedEnemies = 0;
 var intervalID = setInterval(function () {
- let enemy = new Enemy();
- allEnemies.push(enemy);
- if (++delayedEnemies === 2) {
-     window.clearInterval(intervalID);
- }
+   let enemy = new Enemy();
+   allEnemies.push(enemy);
+   if (++delayedEnemies === 2) {
+       window.clearInterval(intervalID);
+   }
 }, 500);
 
 
