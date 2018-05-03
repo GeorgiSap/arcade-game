@@ -16,13 +16,25 @@ class Char {
         this.x = x;
         this.y = y;
     }
+
+
+}
+
+const initialEnemyPositionX = -100;
+
+function randomEnemyPositionY() {
+    return 60 +  (Math.floor(Math.random() * 3) * 83);
+}
+
+function randomEnemySpeed() {
+    return Math.floor(Math.random() * 250) + 150;
 }
 
 // Enemies our player must avoid
 class Enemy extends Char {
     constructor() {
-        super(-100, 60 +  (Math.floor(Math.random() * 3) * 83), 'images/enemy-bug.png');
-        this.speed = Math.floor(Math.random() * 250) + 150;
+        super(initialEnemyPositionX, randomEnemyPositionY(), 'images/enemy-bug.png');
+        this.speed = randomEnemySpeed();
     }
 
     // Update the enemy's position, required method for game
@@ -38,9 +50,11 @@ class Enemy extends Char {
     }
 
     reset() {
-        super.reset(-100, 60 +  (Math.floor(Math.random() * 3) * 83));
-        this.speed = Math.floor(Math.random() * 200) + 150;
+        super.reset(initialEnemyPositionX, randomEnemyPositionY());
+        this.speed = randomEnemySpeed();
     }
+
+
 }
 
 const playerSpeedX = 101;
