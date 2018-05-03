@@ -1,37 +1,37 @@
 // Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    this.x = -100;
-    this.y = 60 +  (Math.floor(Math.random() * 3) * 83);
-    this.speed = Math.floor(Math.random() * 250) + 150;
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-};
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    // Multiplies any movement by the dt parameter
-    // to ensure the game runs at the same speed for
-    // all computers.
-    this.x += this.speed * dt;
-    if (this.x > 505) {
-        this.reset();
+class Enemy {
+    constructor() {
+        this.x = -100;
+        this.y = 60 +  (Math.floor(Math.random() * 3) * 83);
+        this.speed = Math.floor(Math.random() * 250) + 150;
+        // The image/sprite for our enemies, this uses
+        // a helper we've provided to easily load images
+        this.sprite = 'images/enemy-bug.png';
     }
-};
 
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+    // Update the enemy's position, required method for game
+    // Parameter: dt, a time delta between ticks
+    update(dt) {
+        // Multiplies any movement by the dt parameter
+        // to ensure the game runs at the same speed for
+        // all computers.
+        this.x += this.speed * dt;
+        if (this.x > 505) {
+            this.reset();
+        }
+    }
 
-Enemy.prototype.reset = function() {
-    this.x = -100;
-    this.y = 60 +  (Math.floor(Math.random() * 3) * 83);
-    this.speed = Math.floor(Math.random() * 200) + 150;
-};
+    // Draw the enemy on the screen, required method for game
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y); 
+    }
+
+    reset() {
+        this.x = -100;
+        this.y = 60 +  (Math.floor(Math.random() * 3) * 83);
+        this.speed = Math.floor(Math.random() * 200) + 150;
+    }
+}
 
 const playerSpeedX = 101;
 const playerSpeedY = 83;
