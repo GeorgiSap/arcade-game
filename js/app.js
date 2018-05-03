@@ -57,7 +57,11 @@ class Player extends Char {
     }
 
     update() {
-
+        for (const enemy of allEnemies) {
+            if (Math.abs(enemy.x - this.x) < 65 && Math.abs(enemy.y - this.y) < 50) {
+                this.reset();
+            }
+        }
     }
 
     handleInput(pressedkey) {
@@ -101,7 +105,7 @@ let player = new Player();
 let enemy1 = new Enemy();
 let enemy2 = new Enemy();
 let enemy3 = new Enemy();
-let allEnemies = [enemy1, enemy2, enemy3];
+const allEnemies = [enemy1, enemy2, enemy3];
 var delayedEnemies = 0;
 var intervalID = setInterval(function () {
    let enemy = new Enemy();
