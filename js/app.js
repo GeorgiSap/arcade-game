@@ -21,15 +21,19 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-const initialPositionX = 202;
-const initialPositionY = 406;
+const playerSpeedX = 101;
+const playerSpeedY = 83;
+const maxPlayerPosition = 404;
+const minPlayerPosition = 0;
+const initialPlayerPositionX = 202;
+const initialPlayerPositionY = 406;
 
 class Player {
 
     constructor() {
         this.sprite = 'images/char-boy.png';
-        this.x = initialPositionX;
-        this.y = initialPositionY;
+        this.x = initialPlayerPositionX;
+        this.y = initialPlayerPositionY;
     }
 
     update() {
@@ -40,8 +44,34 @@ class Player {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
-    handleInput() {
+    handleInput(pressedkey) {
+        switch(pressedkey) {
+            case 'left':
+                if (this.x > minPlayerPosition) {
+                    this.x -= playerSpeedX;
+                }
+                break;
+            case 'up':
+                if (this.y > minPlayerPosition) {
+                    this.y -= playerSpeedY;
+                }
+                break;
+            case 'right':
+                if (this.x < maxPlayerPosition) {
+                    this.x += playerSpeedX;
+                }
+                break;
+            case 'down':
+                if (this.y < maxPlayerPosition) {
+                    this.y += playerSpeedY;
+                }
+                break;
+        }
+    }
 
+    reset() {
+        this.x = initialPlayerPositionX;
+        this.y = initialPlayerPositionY;
     }
 
 }
