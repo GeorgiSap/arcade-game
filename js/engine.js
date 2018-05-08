@@ -164,7 +164,7 @@ var Engine = (function(global) {
         ctx.textBaseline = "top";
         ctx.textAlign = "right";
         ctx.fillStyle = "white";
-        ctx.font = "20px Arial";
+        ctx.font = "20px Grobold";
         ctx.fillText("Score: " + score, canvas.width - 10, 55);
     }
 
