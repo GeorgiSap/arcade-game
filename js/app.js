@@ -79,6 +79,8 @@ class Enemy extends Character {
 
 }
 
+let score = 0;
+
 const playerSpeedX = 101;
 const playerSpeedY = 83;
 const maxPlayerPosition = 404;
@@ -102,6 +104,7 @@ class Player extends Character {
     update() {
         for (const enemy of allEnemies) {
             if (Math.abs(enemy.x - this.x) < 65 && Math.abs(enemy.y - this.y) < 50) {
+                score = 0;
                 this.reset();
             }
         }
@@ -121,7 +124,10 @@ class Player extends Character {
                 if (this.y > minPlayerPosition) {
                     this.y -= playerSpeedY;
                     if (this.y <= minPlayerPosition) {
-                        setTimeout(() => this.reset(), 200);
+                        setTimeout(() => {
+                            score++;
+                            this.reset();
+                        }, 200);
                     }
                 }
                 break;

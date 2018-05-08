@@ -139,6 +139,7 @@ var Engine = (function(global) {
         }
 
         renderEntities();
+        renderScore();
     }
 
     /* This function is called by the render function and is called on each game
@@ -154,6 +155,17 @@ var Engine = (function(global) {
         });
 
         player.render();
+    }
+
+    /* This function is called by the render function and is called on each game
+     * tick. Its purpose is to render the current score.
+     */
+    function renderScore() {
+        ctx.textBaseline = "top";
+        ctx.textAlign = "right";
+        ctx.fillStyle = "white";
+        ctx.font = "20px Arial";
+        ctx.fillText("Score: " + score, canvas.width - 10, 55);
     }
 
     /* This function does nothing but it could have been a good place to
