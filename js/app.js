@@ -1,3 +1,12 @@
+let score = 0;
+
+const PLAYER_SPEED_X = 101;
+const PLAYER_SPEED_Y = 83;
+const MAX_PLAYER_POSITION = 404;
+const MIN_PLAYER_POSITION = 0;
+const INITIAL_PLAYER_POSITION_X = 202;
+const INITIAL_PLAYER_POSITION_Y = 406;
+
 /**
 * @description Represents a Character
 * @constructor
@@ -79,15 +88,6 @@ class Enemy extends Character {
 
 }
 
-let score = 0;
-
-const playerSpeedX = 101;
-const playerSpeedY = 83;
-const maxPlayerPosition = 404;
-const minPlayerPosition = 0;
-const initialPlayerPositionX = 202;
-const initialPlayerPositionY = 406;
-
 /**
 * @description Represents a Player
 * @extends Character
@@ -95,7 +95,7 @@ const initialPlayerPositionY = 406;
 class Player extends Character {
 
     constructor() {
-        super(initialPlayerPositionX, initialPlayerPositionY, 'images/char-boy.png');
+        super(INITIAL_PLAYER_POSITION_X, INITIAL_PLAYER_POSITION_Y, 'images/char-boy.png');
     }
 
     /**
@@ -116,14 +116,14 @@ class Player extends Character {
     handleInput(pressedkey) {
         switch(pressedkey) {
             case 'left':
-                if (this.x > minPlayerPosition) {
-                    this.x -= playerSpeedX;
+                if (this.x > MIN_PLAYER_POSITION) {
+                    this.x -= PLAYER_SPEED_X;
                 }
                 break;
             case 'up':
-                if (this.y > minPlayerPosition) {
-                    this.y -= playerSpeedY;
-                    if (this.y <= minPlayerPosition) {
+                if (this.y > MIN_PLAYER_POSITION) {
+                    this.y -= PLAYER_SPEED_Y;
+                    if (this.y <= MIN_PLAYER_POSITION) {
                         setTimeout(() => {
                             score++;
                             this.reset();
@@ -132,20 +132,20 @@ class Player extends Character {
                 }
                 break;
             case 'right':
-                if (this.x < maxPlayerPosition) {
-                    this.x += playerSpeedX;
+                if (this.x < MAX_PLAYER_POSITION) {
+                    this.x += PLAYER_SPEED_X;
                 }
                 break;
             case 'down':
-                if (this.y < maxPlayerPosition) {
-                    this.y += playerSpeedY;
+                if (this.y < MAX_PLAYER_POSITION) {
+                    this.y += PLAYER_SPEED_Y;
                 }
                 break;
         }
     }
 
     reset() {
-        super.reset(initialPlayerPositionX, initialPlayerPositionY);
+        super.reset(INITIAL_PLAYER_POSITION_X, INITIAL_PLAYER_POSITION_Y);
     }
 
 }
